@@ -35,6 +35,14 @@ public class BaggageFeeCalculator {
      */
     public double calculateFee(double weight, int bagCount, Long passengerId) {
         // TODO: Implementar lógica de negocio y validación de excepciones
-        return 0.0;
+        if(passengerService.isVip(passengerId) && bagCount==1 && weight<=23){
+            return 0.0;
+        }if(passengerService.isVip(passengerId) && bagCount>1 && weight<=23){
+            return 30.0 *bagCount;
+        }if(!passengerService.isVip(passengerId) && weight<=23){
+            return 30.0 *bagCount;
+        } else{
+            return 30.0 * bagCount + 50.0;
+        }
     }
 }
